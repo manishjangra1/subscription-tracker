@@ -1,0 +1,21 @@
+1fa35c7c04e355e40060fc481ec3631750da7668|1745209800|chore: add mit license
+0410dd09ad860f39c67f44385af05d368e6a8c38|1745312400|docs: add contributing guidelines
+55691d827b675e7d868488f9bd8fd267e9f0e3bf|1745575094|first commit
+088e8b17e5157150fa69bb2e33a840a4c30f86c8|1745578800|chore: add winston logger utility
+2bcb81b9f033c3221b654412385ce30041a2135d|1745595900|feat: integrate morgan with winston logger
+1e0c5af161de7934c7b2c4075d1e92a8c10bce00|1745648100|fix: use winston logger for db connection
+827cd1f110293d0ff6d557964c747e591eec1ce4|1745840100|fix: more descriptive error message for existing user
+7f044c1b4a3b5b78fb5bf6f91d836438e2441e68|1745902800|feat: add token model for temporary auth tokens
+738158fde76978e8beaca985d0af78a45dfa7b5c|1745950500|feat: implement basic signout logic
+5b13f9bf11f49ce846ac1af7ed38b02a3ee784c7|1746008100|feat: setup email service for verification
+a9a09d1e27b83aa1e1ab3c58c83f502c3f5948fe|1746078600|feat: add description and reminderDays to subscription model
+467e74ca37f0c58f70120a980af0358228543661|1746350100|feat: implement category model for better classification
+5604c1dea232a5cd9aa788b88e40e6e2a247de28|1746442800|feat: implement profile image upload using multer and cloudinary
+6bee7371bbc992105459cb5cf214ed7a078b4246|1746693900|feat: implement csv export for subscription data
+5a4fda8bb0a57c51c34873ee01ea3a8f00498d4b|1746781200|feat: implement user roles and admin middleware
+c619519402be277caa5b2f3900182ab6060faf3e|1746874800|feat: add joi validation for auth and subscription routes
+e66fadc2310f5d96b08b064028ebe1b80c197f58|1747029000|feat: full subscription crud with searching and filtering
+f93e2c17f29982d44c452492de6e9b3ab12cbddb|1747304100|docs: add readme and update project metadata
+ad54fa6bb78cf6d80063b93995a80866858e1ac0|1747386900|feat: implement admin dashboard apis for system stats
+c60c7e352557a3052382ce106de4698c4eb58686|1747742400|docs: implement swagger api documentation
+45457b8ecad43491535d45df33abd0badc0c5387|1747825200|release: v1.0.0 stable release with analytics, security, and cron jobs
