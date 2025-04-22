@@ -3,7 +3,7 @@ import subprocess
 from datetime import datetime
 
 def run(cmd, env=None):
-    p = subprocess.Popen(cmd, shell=True, env={**os.environ, **(env or {})} , stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p = subprocess.Popen(cmd, shell=True, env={**os.environ, **(env or {})}, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
     return out.decode(), err.decode(), p.returncode
 
@@ -26,7 +26,7 @@ with open("commit_data.txt", "r") as f:
             "GIT_COMMITTER_DATE": f"{dt} +0530"
         }
         run("git add .")
-        run(f'git commit -m \"{msg}\"', env=env)
+        run(f'git commit -m "{msg}"', env=env)
 
 # 2. Swap branches
 run("git branch -D main")
