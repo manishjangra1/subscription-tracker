@@ -22,19 +22,6 @@ const userSchema = new mongoose.Schema(
       required: [true, "User password is required"],
       minLength: 6,
     },
-    role: {
-      type: String,
-      enum: ["user", "admin"],
-      default: "user",
-    },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
-    profilePicture: {
-      type: String,
-      default: "",
-    },
   },
   { timestamps: true }
 );

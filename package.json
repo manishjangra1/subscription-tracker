@@ -1,13 +1,11 @@
 {
   "name": "sub-tracker",
-  "version": "1.0.0",
-  "description": "Subscription tracker backend API",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js",
-    "test": "jest"
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "@arcjet/inspect": "^1.0.0-beta.6",

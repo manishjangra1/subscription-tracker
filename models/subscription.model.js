@@ -8,12 +8,6 @@ const subscriptionSchema = new mongoose.Schema(
       trim: true,
       minLength: 2,
       maxLength: 100,
-      index: true,
-    },
-    description: {
-      type: String,
-      trim: true,
-      maxLength: 500,
     },
     price: {
       type: Number,
@@ -75,11 +69,6 @@ const subscriptionSchema = new mongoose.Schema(
       ref: "User",
       required: true,
       index: true,
-    },
-    reminderDays: {
-      type: Number,
-      default: 7,
-      min: [1, "Reminder must be at least 1 day before"],
     },
   },
   { timestamps: true }

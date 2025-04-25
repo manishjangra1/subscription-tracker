@@ -14,7 +14,7 @@ export const signUp = async (req, res, next) => {
     // Check is user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      const error = new Error(`A user with this email already exists`);
+      const error = new Error(`User already exists`);
       error.statusCode = 409;
       throw error;
     }
@@ -82,13 +82,5 @@ export const signIn = async (req, res, next) => {
 };
 
 export const signOut = async (req, res, next) => {
-  try {
-    res.clearCookie("token");
-    res.status(200).json({
-      success: true,
-      message: "User signed out successfully",
-    });
-  } catch (error) {
-    next(error);
-  }
+  //Implement signout logic here
 };
