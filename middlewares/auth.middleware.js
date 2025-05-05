@@ -18,11 +18,11 @@ const authorize = async (req, res, next) => {
     const decoded = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(decoded.userId); // maybe error in this
 
-    if (!user) return res.status(401).json({ message: "Unauthorized" });
+    if (!user) return res.status(401).json({ success: false, message: "Unauthorized: User not found" });
     req.user = user;
     next();
   } catch (error) {
-    res.status(401).json({ message: "Unauthorized", error: error.message });
+    res.status(401).json({ success: false, message: "Unauthorized: Invalid or expired token", error: error.message });
   }
 };
 
