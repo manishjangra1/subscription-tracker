@@ -1,6 +1,3 @@
-/**
- * SubTrack Pro API - v1.0.0
- */
 import express from "express";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
