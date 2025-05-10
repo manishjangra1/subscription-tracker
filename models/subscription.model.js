@@ -8,6 +8,7 @@ const subscriptionSchema = new mongoose.Schema(
       trim: true,
       minLength: 2,
       maxLength: 100,
+      index: true,
     },
     description: {
       type: String,
