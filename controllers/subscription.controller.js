@@ -1,7 +1,6 @@
 import { SERVER_URL } from "../config/env.js";
 import { workflowClient } from "../config/upstash.js";
 import Subscription from "../models/subscription.model.js";
-import { convertToCSV } from "../services/export.service.js";
 
 export const createSubscription = async (req, res, next) => {
   try {
@@ -128,19 +127,6 @@ export const getUserSubscriptions = async (req, res, next) => {
     const subscriptions = await Subscription.find({ user: req.params.id });
 
     res.status(200).json({ success: true, data: subscriptions });
-  } catch (error) {
-    next(error);
-  }
-};
-
-export const exportSubscriptions = async (req, res, next) => {
-  try {
-    const subscriptions = await Subscription.find({ user: req.user._id });
-    const csv = convertToCSV(subscriptions);
-
-    res.header("Content-Type", "text/csv");
-    res.attachment("subscriptions.csv");
-    res.send(csv);
   } catch (error) {
     next(error);
   }
