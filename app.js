@@ -15,6 +15,7 @@ import rateLimit from "express-rate-limit";
 import analyticsRouter from "./routes/analytics.routes.js";
 import checkRenewals from "./jobs/reminder.job.js";
 // import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
+const app = express();
 
 // Security middlewares
 app.use(helmet());

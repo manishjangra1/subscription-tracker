@@ -1,33 +1,44 @@
 import os
 import subprocess
-from datetime import datetime
+import sys
+from datetime import datetime, timedelta
+import random
 
-def run(cmd, env=None):
-    p = subprocess.Popen(cmd, shell=True, env={**os.environ, **(env or {})}, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = p.communicate()
-    return out.decode(), err.decode(), p.returncode
+def run_command(command, env=None):
+    process = subprocess.Popen(
+        command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        shell=True,
+        env={**os.environ, **(env or {})}
+    )
+    stdout, stderr = process.communicate()
+    if process.returncode != 0:
+        print(f"Error: {stderr.decode()}")
+        return None
+    return stdout.decode()
 
-# 1. Start fresh on an orphan branch
-run("git checkout --orphan temp-main")
-run("git rm -rf .")
+def commit_with_date(date_obj, message):
+    # Format: "YYYY-MM-DD HH:MM:SS"
+    date_str = date_obj.strftime("%Y-%m-%d %H:%M:%S")
+    env = {
+        "GIT_AUTHOR_DATE": f"{date_str} +0530",
+        "GIT_COMMITTER_DATE": f"{date_str} +0530"
+    }
+    
+    run_command("git add .")
+    # Use -m with quotes, and handle potential special characters
+    result = run_command(f'git commit -m "{message}"', env=env)
+    if result:
+        print(f"[{date_str}] {message}")
 
-with open("commit_data.txt", "r") as f:
-    for line in f:
-        if not line.strip(): continue
-        hash_val, ts, msg = line.strip().split("|")
-        dt = datetime.fromtimestamp(int(ts)).strftime('%Y-%m-%d %H:%M:%S')
-        
-        # Checkout files from original commit
-        run(f"git checkout {hash_val} -- .")
-        
-        # Commit with original metadata
-        env = {
-            "GIT_AUTHOR_DATE": f"{dt} +0530",
-            "GIT_COMMITTER_DATE": f"{dt} +0530"
-        }
-        run("git add .")
-        run(f'git commit -m "{msg}"', env=env)
+def get_random_time(date_obj):
+    # Random time between 09:00 and 23:00
+    hour = random.randint(9, 22)
+    minute = random.randint(0, 59)
+    second = random.randint(0, 59)
+    return date_obj.replace(hour=hour, minute=minute, second=second)
 
-# 2. Swap branches
-run("git branch -D main")
-run("git branch -m main")
+# This script will be called with specific chunks of work
+if __name__ == "__main__":
+    pass
