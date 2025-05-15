@@ -21,3 +21,4 @@ A production-ready backend API for tracking and managing recurring subscriptions
 2. Install dependencies: `npm install`
 3. Set up environment variables in `.env`.
 4. Start the dev server: `npm run dev`
+
