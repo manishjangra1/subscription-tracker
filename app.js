@@ -16,6 +16,7 @@ import workflowRouter from "./routes/workflow.routes.js";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import analyticsRouter from "./routes/analytics.routes.js";
+import adminRouter from "./routes/admin.routes.js";
 import checkRenewals from "./jobs/reminder.job.js";
 // import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
 
@@ -38,6 +39,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/subscriptions", subscriptionRouter);
 app.use("/api/v1/analytics", analyticsRouter);
+app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/workflows", workflowRouter);
 
 //middlewares
