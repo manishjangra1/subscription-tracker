@@ -1,20 +1,20 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
-import logger from "./utils/logger.js";
+import logger from "./shared/utils/logger.js";
 
 import { PORT } from "./config/env.js";
 import authRouter from "./routes/auth.routes.js";
 import subscriptionRouter from "./routes/subscription.routes.js";
 import userRouter from "./routes/user.routes.js";
 import connectToDatabase from "./database/mongodb.js";
-import errorMiddleware from "./middlewares/error.middleware.js";
+import errorMiddleware from "./shared/middlewares/error.middleware.js";
 import workflowRouter from "./routes/workflow.routes.js";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import analyticsRouter from "./routes/analytics.routes.js";
 import checkRenewals from "./jobs/reminder.job.js";
-// import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
+
 const app = express();
 
 // Security middlewares
@@ -29,16 +29,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan("combined", { stream: { write: (message) => logger.info(message.trim()) } }));
-// app.use(arcjetMiddleware);
 
-//routes
+// routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/subscriptions", subscriptionRouter);
 app.use("/api/v1/analytics", analyticsRouter);
 app.use("/api/v1/workflows", workflowRouter);
 
-//middlewares
+// middlewares
 app.use(errorMiddleware);
 
 app.get("/", (req, res) => {
@@ -53,3 +52,4 @@ app.listen(PORT, async () => {
   checkRenewals();
 });
 
+export default app;
