@@ -14,8 +14,11 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import analyticsRouter from "./routes/analytics.routes.js";
 import checkRenewals from "./jobs/reminder.job.js";
+import correlationMiddleware from "./shared/middlewares/correlation.middleware.js";
 
 const app = express();
+
+app.use(correlationMiddleware);
 
 // Security middlewares
 app.use(helmet());
