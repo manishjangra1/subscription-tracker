@@ -3,15 +3,14 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 import { JWT_EXPIRES_IN, JWT_SECRET } from "../config/env.js";
+import { generateTokens, clearSessions } from "../services/auth.service.js";
 
 export const signUp = async (req, res, next) => {
   const session = await mongoose.startSession();
   session.startTransaction();
 
   try {
-    // Logic to create a new user
     const { name, email, password } = req.body;
-    // Check is user exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       const error = new Error(`A user with this email already exists`);
@@ -19,7 +18,6 @@ export const signUp = async (req, res, next) => {
       throw error;
     }
 
-    // Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -27,17 +25,30 @@ export const signUp = async (req, res, next) => {
       [{ name, email, password: hashedPassword }],
       { session }
     );
-    const token = jwt.sign({ userId: newUsers[0]._id }, JWT_SECRET, {
-      expiresIn: JWT_EXPIRES_IN,
-    });
+    const user = newUsers[0];
+
+    const { accessToken, refreshToken } = await generateTokens(
+      user._id, 
+      req.get("User-Agent"), 
+      req.ip
+    );
+
     await session.commitTransaction();
     session.endSession();
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
     res.status(201).json({
       success: true,
       message: "User created successfully",
       data: {
-        token,
-        user: newUsers[0],
+        token: accessToken,
+        user,
       },
     });
   } catch (error) {
@@ -64,15 +75,24 @@ export const signIn = async (req, res, next) => {
       throw error;
     }
 
-    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
-      expiresIn: JWT_EXPIRES_IN,
+    const { accessToken, refreshToken } = await generateTokens(
+      user._id,
+      req.get("User-Agent"),
+      req.ip
+    );
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(200).json({
       success: true,
       message: "User signed in successfully",
       data: {
-        token,
+        token: accessToken,
         user,
       },
     });
@@ -83,7 +103,14 @@ export const signIn = async (req, res, next) => {
 
 export const signOut = async (req, res, next) => {
   try {
-    res.clearCookie("token");
+    const { refreshToken } = req.cookies;
+    if (refreshToken) {
+      // Logic to revoke refresh token could go here
+    }
+    
+    await clearSessions(req.user._id);
+
+    res.clearCookie("refreshToken");
     res.status(200).json({
       success: true,
       message: "User signed out successfully",
