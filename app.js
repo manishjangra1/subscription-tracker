@@ -1,6 +1,3 @@
-/**
- * SubTrack Pro API - v1.0.0
- */
 import express from "express";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
@@ -16,9 +13,6 @@ import workflowRouter from "./routes/workflow.routes.js";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import analyticsRouter from "./routes/analytics.routes.js";
-import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./config/swagger.js";
-import adminRouter from "./routes/admin.routes.js";
 import checkRenewals from "./jobs/reminder.job.js";
 // import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
 
@@ -41,10 +35,7 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/subscriptions", subscriptionRouter);
 app.use("/api/v1/analytics", analyticsRouter);
-app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/workflows", workflowRouter);
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //middlewares
 app.use(errorMiddleware);
