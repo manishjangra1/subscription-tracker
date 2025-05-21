@@ -1,1 +1,2 @@
 Commit at 2025-05-21 10:15:22: add verify email route
+Commit at 2025-05-21 12:45:01: basic verification mail template
