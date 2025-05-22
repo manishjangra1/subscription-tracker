@@ -2,3 +2,4 @@ Commit at 2025-05-21 10:15:22: add verify email route
 Commit at 2025-05-21 12:45:01: basic verification mail template
 Commit at 2025-05-21 15:30:11: fix expired token handling
 Commit at 2025-05-21 17:55:44: cleanup auth verification flow
+Commit at 2025-05-22 09:45:11: add xss and mongo sanitize middleware

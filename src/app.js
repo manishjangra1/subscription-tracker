@@ -15,10 +15,14 @@ import rateLimit from "express-rate-limit";
 import analyticsRouter from "./routes/analytics.routes.js";
 import checkRenewals from "./jobs/reminder.job.js";
 import correlationMiddleware from "./shared/middlewares/correlation.middleware.js";
+import mongoSanitize from "express-mongo-sanitize";
+import xss from "xss-clean";
 
 const app = express();
 
 app.use(correlationMiddleware);
+app.use(mongoSanitize());
+app.use(xss());
 
 // Security middlewares
 app.use(helmet());
