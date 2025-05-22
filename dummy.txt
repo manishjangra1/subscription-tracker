@@ -5,3 +5,4 @@ Commit at 2025-05-21 17:55:44: cleanup auth verification flow
 Commit at 2025-05-22 09:45:11: add xss and mongo sanitize middleware
 Commit at 2025-05-22 13:20:45: implement audit logging model
 Commit at 2025-05-22 16:10:05: add security hardening layer
+Commit at 2025-05-22 18:40:22: fix auth csrf edge case
