@@ -80,6 +80,17 @@ const subscriptionSchema = new mongoose.Schema(
       default: 7,
       min: [1, "Reminder must be at least 1 day before"],
     },
+    trialEndsAt: {
+      type: Date,
+    },
+    paymentHistory: [
+      {
+        paymentDate: Date,
+        amount: Number,
+        status: String,
+      },
+    ],
+    tags: [String],
   },
   { timestamps: true }
 );
