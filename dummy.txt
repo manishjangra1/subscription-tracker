@@ -16,3 +16,4 @@ Commit at 2025-05-24 16:40:33: patch duplicate reminder issue
 Commit at 2025-05-24 18:15:22: prevent multiple workflow triggers
 Commit at 2025-05-25 09:15:32: improve analytics aggregation
 Commit at 2025-05-25 11:45:22: optimize monthly stats query
+Commit at 2025-05-25 14:30:11: move analytics into service layer
