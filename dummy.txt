@@ -26,3 +26,4 @@ Commit at 2025-05-27 16:50:01: fix auth csrf edge case
 Commit at 2025-05-27 18:40:45: cleanup validation errors
 Commit at 2025-06-04 10:15:32: add docker support
 Commit at 2025-06-04 12:45:22: fix container env issue
+Commit at 2025-06-04 14:30:11: add health check route
