@@ -29,3 +29,4 @@ Commit at 2025-06-04 12:45:22: fix container env issue
 Commit at 2025-06-04 14:30:11: add health check route
 Commit at 2025-06-04 17:50:01: improve graceful shutdown
 Commit at 2025-06-10 09:15:32: optimize mongodb indexes
+Commit at 2025-06-10 11:45:22: add swagger setup
