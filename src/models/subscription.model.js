@@ -119,5 +119,9 @@ subscriptionSchema.pre("save", function (next) {
   next();
 });
 
+subscriptionSchema.index({ renewalDate: 1 });
+subscriptionSchema.index({ user: 1, status: 1 });
+subscriptionSchema.index({ category: 1 });
+
 const Subscription = mongoose.model("Subscription", subscriptionSchema);
 export default Subscription;
